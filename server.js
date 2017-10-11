@@ -34,19 +34,25 @@ var server = http.createServer(function(req, res) {
     var filePath = path.join(__dirname, webPath, pathname);
     console.log('filePath:' + filePath);
 
+    var resHeader = {
+        'Accept-Charset': 'utf-8',
+        'Accept-Language': 'zh-TW',
+        'Content-Type': 'text/html; charset=utf-8',
+    }
+
 
     // 讀取檔案
     fs.readFile(filePath, 'utf8', function(err, content) {
         if (err) {
             console.log('Failed to read');
             // 若檔案讀取錯誤，回傳 404
-            res.writeHead(404, { 'Content-Type': 'text/html' });
+            res.writeHead(404, resHeader);
             res.write('<h1>404. 找不到檔案!!</h1>')
             res.end();
             return;
         }
         // 將檔案內容傳給瀏覽器
-        //res.writeHead(200, { 'Content-Type': 'text/' });
+        res.writeHead(200, resHeader);
         res.write(content);
         res.end();
     })

@@ -1,6 +1,8 @@
 //引用node.js 內建的http 模組
 const http = require('http')
 
+var port = process.env.port || 1234
+
 //建立一個 HttpServer
 //req 從client發出的，res 從伺服器發出給client
 var server = http.createServer(function(req, res) {
@@ -15,6 +17,6 @@ var server = http.createServer(function(req, res) {
     res.end()
 });
 
-//將Server 執行，開啟特定port 1234
-server.listen(1234);
-console.log('Server running at http://127.0.0.1:1234');
+//將Server 執行，開啟特定port
+server.listen(port);
+console.log('Server running at http://127.0.0.1:' + port);

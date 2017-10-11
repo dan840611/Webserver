@@ -14,6 +14,7 @@ var server = http.createServer(function(req, res) {
     res.writeHead(200, resHeader)
     res.write('<h1>Hello</h1>', 'utf8')
     res.write('<p>這是node.js建立的</p>', 'utf8')
+    res.write('<p>已成功連到主機</p>')
     res.end()
 });
 

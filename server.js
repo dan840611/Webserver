@@ -40,6 +40,29 @@ var server = http.createServer(function(req, res) {
         'Content-Type': 'text/html; charset=utf-8',
     }
 
+    //  https://regex101.com/r/ork1TW/1
+    //  正規表示法：  /^\/insert\/[brdtBRDT]\d{8}\/.+\/.+
+    //  特別判斷新資料的指令
+    if (/^\/insert\/[brdtBRDT]\d{8}\/.+\/.+/i.test(pathname)) {
+        //剖析url資料
+        var list = pathname.split('/');
+        var action = list[1];
+        var sid = list[2];
+        var name = list[3];
+        var dep = list[4];
+        console.log(pathname);
+        //將資料讀取並新增至mongoDB
+
+
+        //顯示新增成功
+        res.writeHead(200, resHeader);
+        res.write('<h1> updata data </h1>');
+        res.write('學號：' + sid + '<br>');
+        res.write('姓名：' + name + '<br>');
+        res.write('學系：' + dep + '<br>');
+        res.end();
+
+    }
 
     // 讀取檔案
     fs.readFile(filePath, 'utf8', function(err, content) {
